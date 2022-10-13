@@ -64,7 +64,7 @@ internal object MapDownloader : Module(
                     defaultScope.launch {
                         runSafe {
                             renderAndSaveMapImage(mapInfo)
-                            LambdaMod.LOG.info("Saved map - name: ${mapInfo.name} id: ${mapInfo.id}")
+                            LambdaMod.LOG.info("Saved map - id: ${mapInfo.id}")
                         }
                     }
                     pendingTasks.remove(mapInfo)
@@ -161,7 +161,7 @@ internal object MapDownloader : Module(
         try {
             val resized = BufferedImage(finalSize, finalSize, img.type)
             val g = resized.createGraphics()
-            val loc = "${FolderUtils.mapImagesFolder}${mapInfo.hash}_name_${mapInfo.name.replace(File.separator, "")}_id_${mapInfo.id}_${if (mc.isIntegratedServerRunning) "local" else "server_${player.connection.networkManager.remoteAddress.toString().replace("/", "_").replace(":", "_")}"}.png"
+            val loc = "${FolderUtils.mapImagesFolder}${mapInfo.id}"}.png"
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR)
             g.drawImage(img, 0, 0, finalSize, finalSize, 0, 0, img.width,
